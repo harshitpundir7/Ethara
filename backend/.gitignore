@@ -1,3 +1,14 @@
+# Secrets
 .env
+
+# Local database files
 *.db
+*.db-wal
+*.db-shm
+
+# Dependencies
 node_modules/
+
+# Logs
+*.log
+npm-debug.log*
