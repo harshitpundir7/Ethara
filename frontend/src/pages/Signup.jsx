@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserPlus } from 'lucide-react';
 import api from '../api/axios';
+import { getErrMsg } from '../api/errors';
 import { useAuthStore } from '../store/authStore';
 
 export default function Signup() {
@@ -26,7 +27,7 @@ export default function Signup() {
       setAuth(res.data.user, res.data.token);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.error || 'Signup failed');
+      setError(getErrMsg(err, 'Signup failed'));
     } finally {
       setLoading(false);
     }

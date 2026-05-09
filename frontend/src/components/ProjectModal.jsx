@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import api from '../api/axios';
+import { getErrMsg } from '../api/errors';
 
 export default function ProjectModal({ onClose, onCreated, existing }) {
   const [name, setName] = useState(existing?.name || '');
@@ -23,7 +24,7 @@ export default function ProjectModal({ onClose, onCreated, existing }) {
       }
       onClose();
     } catch (err) {
-      setError(err.response?.data?.error || 'Something went wrong');
+      setError(getErrMsg(err, 'Something went wrong'));
     } finally {
       setLoading(false);
     }

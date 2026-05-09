@@ -1,13 +1,9 @@
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 
-// In dev: Vite proxy rewrites /api → http://localhost:3000/api
-// In prod (Vercel): VITE_API_URL = https://ethara-production-51de.up.railway.app
-const baseURL = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api`
-  : '/api';
-
-const api = axios.create({ baseURL });
+// In dev:  Vite proxy rewrites /api → http://localhost:3000
+// In prod: vercel.json rewrites /api → https://ethara-production-51de.up.railway.app/api
+const api = axios.create({ baseURL: '/api' });
 
 // Attach JWT token to every request
 api.interceptors.request.use((config) => {

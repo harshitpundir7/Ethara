@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LogIn, Zap, CheckCircle, Users } from 'lucide-react';
 import api from '../api/axios';
+import { getErrMsg } from '../api/errors';
 import { useAuthStore } from '../store/authStore';
 
 export default function Login() {
@@ -20,7 +21,7 @@ export default function Login() {
       setAuth(res.data.user, res.data.token);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed');
+      setError(getErrMsg(err, 'Login failed'));
     } finally {
       setLoading(false);
     }
